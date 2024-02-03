@@ -1,30 +1,38 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';
-import {
-  UPDATE_CATEGORIES,
-  UPDATE_CURRENT_CATEGORY,
-} from '../../utils/actions';
 import { QUERY_CATEGORIES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { updateCategories as updateCategoriesAction, 
+         updateCurrentCategory as updateCurrentCategoryAction} from '../../../store/slices/categorySlice';
 
 function CategoryMenu() {
 
-    const [state, dispatch] = useStoreContext();
+    // const [state, dispatch] = useStoreContext();
 
-    const { categories } = state;
+    // const { categories } = state;
 
     const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
+
+    const categories = useSelector((state) => state.categories);
+    const currentCategory = useSelector((state) => state.categories.currentCategory);
+
+    categories.categories.map((category) => category)
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
 
         if (categoryData) {
 
-            dispatch({
-
-                type: UPDATE_CATEGORIES,
-                categories: categoryData.categories,
-            });
+            dispatch(updateCategoriesAction(
+                
+                {
+                    categories: categoryData.categories,
+                }
+            ));
 
             categoryData.categories.forEach((category) => {
 
@@ -35,10 +43,12 @@ function CategoryMenu() {
 
             idbPromise('categories', 'get').then((categories) => {
                 
-                dispatch({
-                type: UPDATE_CATEGORIES,
-                categories: categories,
-                });
+                dispatch(updateCategoriesAction(
+                    
+                    {
+                        categories: categories,
+                    }
+                ));
             });
         }
 
@@ -46,18 +56,19 @@ function CategoryMenu() {
 
     const handleClick = (id) => {
 
-        dispatch({
-
-            type: UPDATE_CURRENT_CATEGORY,
-            currentCategory: id,
-        });
+        dispatch(updateCurrentCategoryAction(
+            
+            {
+                currentCategory: id,
+            }
+        ));
     };
 
     return (
 
         <div>
             <h2>Choose a Category:</h2>
-            {categories.map((item) => (
+            {categories.categories.map((item) => (
                 <button
                     key={item._id}
                     onClick={() => {

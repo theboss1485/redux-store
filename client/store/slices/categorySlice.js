@@ -13,13 +13,13 @@ const categorySlice = createSlice({
 
         updateCategories: (state, action) => {
 
-            state.categories = action.payload;
+            state.categories = action.payload.categories;
             return state;
         },
 
         updateCurrentCategory: (state, action) => {
 
-            state.currentCategory = action.payload;
+            state.currentCategory = action.payload.currentCategory;
             return state;
         }
     }

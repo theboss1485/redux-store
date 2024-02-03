@@ -12,7 +12,7 @@ const productSlice = createSlice({
 
         updateProducts: (state, action) => {
 
-            state.products = action.payload;
+            state.products = action.payload.products;
             return state;
         },
     }

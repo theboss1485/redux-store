@@ -6,30 +6,34 @@ const cartSlice = createSlice({
     initialState: {
 
         cart: [],
-        cartOpen: true
+        cartOpen: false
     },
     
     reducers: {
 
-        addToCart: (state, action) => {
+        addToCart: function(state, action) {
 
-            state.cart.push(action.product)
-
-            if(!state.cartOpen){
+            if(state.cartOpen === false){
 
                 state.cartOpen = true;
             }
 
+            state.cart.push(action.payload.product)
             return state;
+
+            // return {
+            //     ...state,
+            //     cart: [...state.cart, action.payload.product]
+            //   };
         },
 
-        addMultipleToCart: (state, action) => {
+        addMultipleToCart: function (state, action) {
 
-            for(counter = 0; counter < action.products.length; counter++){
+            for(let counter = 0; counter < action.payload.products.length; counter++){
 
-                state.cart.push(action.products[counter])
+                state.cart.push(action.payload.products[counter])
                 
-                if(!state.cartOpen){
+                if(state.cartOpen === false){
 
                     state.cartOpen = true;
                 }
@@ -38,7 +42,7 @@ const cartSlice = createSlice({
             return state;
         },
 
-        updateCartQuantity: (state, action) => {
+        updateCartQuantity: function (state, action) {
 
             if(!state.cartOpen){
 
@@ -47,18 +51,20 @@ const cartSlice = createSlice({
 
             state.cart.map((product) => {
 
-                if (action._id === product._id) {
-                    product.purchaseQuantity = action.purchaseQuantity;
+                if (action.payload._id === product._id) {
+                    product.purchaseQuantity = action.payload.purchaseQuantity;
                 }
                 return product;
             })
+
+            return state
         },
 
         removeFromCart: (state, action) => {
 
             state.cart = state.cart.filter((product) => {
                 
-                product._id !== action._id;
+                return product._id !== action.payload._id;
             });
 
             if (state.cart.length === 0 ){
@@ -76,17 +82,27 @@ const cartSlice = createSlice({
             return state;
         },
 
-        toggleCart: (state) => {
+        toggleCart: function(state) {
 
-            state.cart = [];
-            state.cartOpen = !state.cartOpen;
-            return state;
+            if(state.cartOpen === true){
+
+                state.cartOpen = false;
+                return state;
+            
+            } else {
+
+                state.cartOpen = true;
+                return state;
+            }
+
+            
         }
     }
 })
 
 export const { addToCart, 
-               addMultipleToCart, 
+               addMultipleToCart,
+               updateCartQuantity, 
                removeFromCart, 
                clearCart, 
                toggleCart } = cartSlice.actions;

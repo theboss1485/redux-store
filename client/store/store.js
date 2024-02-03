@@ -9,7 +9,7 @@ import productReducer from './slices/productSlice'
 import categoryReducer from './slices/categorySlice'
 import cartReducer from './slices/cartSlice'
 
-export default configureStore({
+const store = configureStore({
 
     reducer: {
 
@@ -18,6 +18,8 @@ export default configureStore({
         cart: cartReducer
     }
 })
+
+export default store;
 
 
 

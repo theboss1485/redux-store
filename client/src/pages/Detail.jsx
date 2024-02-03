@@ -4,18 +4,29 @@ import { useQuery } from '@apollo/client';
 
 import Cart from '../components/Cart';
 import { useStoreContext } from '../utils/GlobalState';
+// import {
+
+//     REMOVE_FROM_CART,
+//     UPDATE_CART_QUANTITY,
+//     ADD_TO_CART,
+//     UPDATE_PRODUCTS,
+
+//} from '../utils/actions';
 import {
 
-    REMOVE_FROM_CART,
-    UPDATE_CART_QUANTITY,
-    ADD_TO_CART,
-    UPDATE_PRODUCTS,
+    addToCart as addToCartAction,
+    removeFromCart as removeFromCartAction,
+    updateCartQuantity as updateCartQuantityAction,
 
-} from '../utils/actions';
+
+} from '../../store/slices/cartSlice'
+
+import { updateProducts as updateProductsAction } from '../../store/slices/productSlice'
+
 import { QUERY_PRODUCTS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
 import spinner from '../assets/spinner.gif';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Detail() {
     //const [state, dispatch] = useStoreContext();
@@ -26,7 +37,8 @@ function Detail() {
 
     const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-    const { products, cart } = state;
+    const cart = useSelector((state) => state.cart);
+    const products = useSelector((state) => state.products);
 
     useEffect(() => {
 
@@ -39,11 +51,12 @@ function Detail() {
         // retrieved from server
         else if (data) {
 
-            dispatch({
-
-                type: UPDATE_PRODUCTS,
-                products: data.products,
-            });
+            dispatch(updateProductsAction(
+                
+                {
+                    products: data.products,
+                }
+            ));
 
             data.products.forEach((product) => {
 
@@ -56,11 +69,12 @@ function Detail() {
 
             idbPromise('products', 'get').then((indexedProducts) => {
 
-                dispatch({
-
-                    type: UPDATE_PRODUCTS,
-                    products: indexedProducts,
-                });
+                dispatch(updateProductsAction(
+                    
+                    {
+                        products: indexedProducts,
+                    }
+                ));
             });
         }
 
@@ -72,12 +86,13 @@ function Detail() {
         
         if (itemInCart) {
 
-            dispatch({
+            dispatch(updateCartQuantityAction(
                 
-                type: UPDATE_CART_QUANTITY,
-                _id: id,
-                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-            });
+                {
+                    _id: id,
+                    purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+                }
+            ));
 
             idbPromise('cart', 'put', {
                 ...itemInCart,
@@ -86,11 +101,12 @@ function Detail() {
 
         } else {
 
-        dispatch({
-
-            type: ADD_TO_CART,
-            product: { ...currentProduct, purchaseQuantity: 1 },
-        });
+        dispatch(addToCartAction(
+            
+            {
+                product: { ...currentProduct, purchaseQuantity: 1 },
+            }
+        ));
 
             idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
         }
@@ -98,11 +114,12 @@ function Detail() {
 
     const removeFromCart = () => {
 
-        dispatch({
-
-            type: REMOVE_FROM_CART,
-            _id: currentProduct._id,
-        });
+        dispatch(removeFromCartAction(
+            
+            {
+                _id: currentProduct._id,
+            }
+        ));
 
         idbPromise('cart', 'delete', { ...currentProduct });
     };

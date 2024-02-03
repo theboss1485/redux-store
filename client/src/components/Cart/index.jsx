@@ -5,15 +5,24 @@ import { QUERY_CHECKOUT } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
-import { useStoreContext } from '../../utils/GlobalState';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+
+    addMultipleToCart as addMultipleToCartAction,
+    toggleCart as toggleCartAction,
+
+} from '../../../store/slices/cartSlice'
 import './style.css';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
 
-    const [state, dispatch] = useStoreContext();
+    const dispatch = useDispatch();
+    const cart = useSelector((state) => state.cart);
+    const cartOpen = useSelector((state) => state.cart.cartOpen);
+
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
     useEffect(() => {
@@ -32,25 +41,30 @@ const Cart = () => {
         async function getCart() {
 
             const cart = await idbPromise('cart', 'get');
-            dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
+            dispatch(addMultipleToCartAction(
+
+                { 
+                    products: [...cart] 
+                }
+            ));
         }
 
-        if (!state.cart.length) {
+        if (!cart.cart.length) {
 
             getCart();
         }
 
-  }, [state.cart.length, dispatch]);
+  }, [cart.cart.length, dispatch]);
 
     function toggleCart() {
 
-        dispatch({ type: TOGGLE_CART });
+        dispatch(toggleCartAction());
     }
 
     function calculateTotal() {
 
         let sum = 0;
-        state.cart.forEach((item) => {
+        cart.cart.forEach((item) => {
             sum += item.price * item.purchaseQuantity;
         });
 
@@ -61,7 +75,7 @@ const Cart = () => {
 
         const productIds = [];
 
-        state.cart.forEach((item) => {
+        cart.cart.forEach((item) => {
 
             for (let i = 0; i < item.purchaseQuantity; i++) {
                 productIds.push(item._id);
@@ -74,7 +88,7 @@ const Cart = () => {
         });
     }
 
-    if (!state.cartOpen) {
+    if (!cartOpen) {
 
         return (
 
@@ -93,9 +107,9 @@ const Cart = () => {
                 [close]
             </div>
             <h2>Shopping Cart</h2>
-            {state.cart.length ? (
+            {cart.cart.length ? (
                 <div>
-                    {state.cart.map((item) => (
+                    {cart.cart.map((item) => (
                         <CartItem key={item._id} item={item} />
                     ))}
 
