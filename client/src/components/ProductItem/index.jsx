@@ -10,7 +10,7 @@ import {
     addToCart as addToCartAction,
     updateCartQuantity as updateCartQuantityAction,
 
-} from '../../../store/slices/cartSlice'
+} from '../../../store/reducers/slices/cartSlice'
 
 function ProductItem(item) {
 

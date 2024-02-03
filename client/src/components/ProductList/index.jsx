@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import ProductItem from '../ProductItem';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
-import { updateProducts as updateProductsAction } from '../../../store/slices/productSlice';
+import { updateProducts as updateProductsAction } from '../../../store/reducers/slices/productSlice';
 import { useQuery } from '@apollo/client';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';

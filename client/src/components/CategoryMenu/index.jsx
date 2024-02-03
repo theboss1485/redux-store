@@ -6,7 +6,7 @@ import { idbPromise } from '../../utils/helpers';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { updateCategories as updateCategoriesAction, 
-         updateCurrentCategory as updateCurrentCategoryAction} from '../../../store/slices/categorySlice';
+         updateCurrentCategory as updateCurrentCategoryAction} from '../../../store/reducers/slices/categorySlice';
 
 function CategoryMenu() {
 

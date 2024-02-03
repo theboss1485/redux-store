@@ -19,9 +19,9 @@ import {
     updateCartQuantity as updateCartQuantityAction,
 
 
-} from '../../store/slices/cartSlice'
+} from '../../store/reducers/slices/cartSlice'
 
-import { updateProducts as updateProductsAction } from '../../store/slices/productSlice'
+import { updateProducts as updateProductsAction } from '../../store/reducers/slices/productSlice'
 
 import { QUERY_PRODUCTS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';

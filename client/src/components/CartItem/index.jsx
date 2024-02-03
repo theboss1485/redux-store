@@ -1,7 +1,7 @@
 import { useStoreContext } from "../../utils/GlobalState";
 import { removeFromCart as removeFromCartAction,
          updateCartQuantity as updateCartQuantityAction} 
-from "../../../store/slices/cartSlice";
+from "../../../store/reducers/slices/cartSlice";
 import { idbPromise } from "../../utils/helpers";
 import { useSelector, useDispatch } from 'react-redux';
 

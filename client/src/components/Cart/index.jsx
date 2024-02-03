@@ -12,7 +12,7 @@ import {
     addMultipleToCart as addMultipleToCartAction,
     toggleCart as toggleCartAction,
 
-} from '../../../store/slices/cartSlice'
+} from '../../../store/reducers/slices/cartSlice'
 import './style.css';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
