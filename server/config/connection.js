@@ -1,5 +1,14 @@
+// This file sets up the connection to the mongoose database.
+require('dotenv').config()
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mern-shopping');
+let atlastConnectionString = undefined
+
+if(process.env.MONGODB_URI){
+
+    atlastConnectionString = encodeURI(process.env.MONGODB_URI)
+}
+
+mongoose.connect(atlastConnectionString || process.env.LOCALHOST_DB_CONNECTION);
 
 module.exports = mongoose.connection;
