@@ -1,4 +1,3 @@
-import { useStoreContext } from "../../utils/GlobalState";
 import { removeFromCart as removeFromCartAction,
          updateCartQuantity as updateCartQuantityAction} 
 from "../../../store/reducers/slices/cartSlice";
@@ -8,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 const CartItem = ({ item }) => {
 
     const dispatch = useDispatch();
-    const cart = useSelector((state) => state.cart);
 
     const removeFromCart = (item) => {
 

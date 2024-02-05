@@ -1,7 +1,6 @@
-import productReducer, {initialState as productInitialState} from './slices/productSlice'
-import resetReducer from './slices/resetSlice'
-import categoryReducer, {initialState as categoryInitialState} from './slices/categorySlice'
-import cartReducer, {initialState as cartInitialState} from './slices/cartSlice'
+import productReducer from './slices/productSlice'
+import categoryReducer from './slices/categorySlice'
+import cartReducer from './slices/cartSlice'
 import { combineReducers } from '@reduxjs/toolkit'
 
 const rootReducer = combineReducers({

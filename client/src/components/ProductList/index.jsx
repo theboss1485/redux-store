@@ -10,12 +10,12 @@ import spinner from '../../assets/spinner.gif';
 import { useSelector, useDispatch } from 'react-redux';
 
 function ProductList() {
+        const dispatch = useDispatch();
+        const currentCategory = useSelector((state) => state.categories.currentCategory);
+        const products = useSelector((state) => state.products);
+    // const [state, dispatch] = useStoreContext();
 
-    // Allows us top GRAB refernece to the REDUCERS object
-    const dispatch = useDispatch();   
-    
-    // this hook allows us to GRAB STATE (dataset from our STORE)
-    const {currentCategory, products} = useSelector(state => state);  
+    // const { currentCategory } = state;
 
     const { loading, data } = useQuery(QUERY_PRODUCTS);
 
