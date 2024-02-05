@@ -21,7 +21,7 @@ const categorySlice = createSlice({
 
             state.currentCategory = action.payload.currentCategory;
             return state;
-        }
+        },
     }
 })
 

@@ -10,9 +10,12 @@ const productSlice = createSlice({
     
     reducers: {
 
-        updateProducts: (state, action) => {
+        updateProducts: function (state, action) {
+
 
             state.products = action.payload.products;
+        
+
             return state;
         },
     }

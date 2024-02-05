@@ -51,7 +51,6 @@ function ProductItem(item) {
 
         } else {
 
-            console.log("cart", cart);
 
             dispatch(addToCartAction(
 
@@ -59,8 +58,6 @@ function ProductItem(item) {
                     product: { ...item, purchaseQuantity: 1 }
                 }
             ));
-
-            console.log("cart2", cart);
 
             idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
         }
