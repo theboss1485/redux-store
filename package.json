@@ -11,6 +11,9 @@
         "build": "cd client && npm run build",
         "test": "cd client && npm run test"
     },
+    "engines": {
+        "node": "18.18.1"
+    },
     "keywords": [],
     "author": "",
     "license": "ISC",
