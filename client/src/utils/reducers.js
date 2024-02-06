@@ -10,23 +10,19 @@ import {
     TOGGLE_CART,
 } from './actions';
 
-/*
-const initialState = {
-
-}
-*/ 
-
-// TODO: To get a better understand of how a reducer works - add comments to the various actions in the reducer
+// This reducer executes different actions to update the application's state based on the action type.
 export const reducer = (state, action) => {
+
     switch (action.type) {
-        // TODO: Add a comment describing the functionality of the UPDATE_PRODUCTS case
-        // Your comment here
+
+        // This case allows for updating the displayed products.
         case UPDATE_PRODUCTS:
             return {
                 ...state,
                 products: [...action.products],
             };
 
+        // This case allows for adding an item to the cart.
         case ADD_TO_CART:
             return {
                 ...state,
@@ -34,13 +30,14 @@ export const reducer = (state, action) => {
                 cart: [...state.cart, action.product],
             };
 
+        // This case allows for adding multiple items to the cart.
         case ADD_MULTIPLE_TO_CART:
             return {
                 ...state,
                 cart: [...state.cart, ...action.products],
             };
-        // TODO: Add a comment describing the functionality of the UPDATE_CART_QUANTITY case
-        // Your comment here
+        
+        // This case allows for updating the quantity of an item in the cart.
         case UPDATE_CART_QUANTITY:
             return {
                 ...state,
@@ -54,10 +51,10 @@ export const reducer = (state, action) => {
                 }),
             };
 
-        // TODO: Add a comment describing the functionality of the REMOVE_FROM_CART case
-        // Your comment here
+        // This case allows for removing an item from the cart.
         case REMOVE_FROM_CART:
             let newState = state.cart.filter((product) => {
+
                 return product._id !== action._id;
             });
 
@@ -67,6 +64,7 @@ export const reducer = (state, action) => {
                 cart: newState,
             };
 
+        // This case allows for clearing all the items out of the cart.
         case CLEAR_CART:
             return {
                 ...state,
@@ -74,6 +72,7 @@ export const reducer = (state, action) => {
                 cart: [],
             };
 
+        /* This case allows for toggling the cart between a 'displayed' and 'not displayed state.*/
         case TOGGLE_CART:
             return {
                 ...state,
@@ -92,8 +91,8 @@ export const reducer = (state, action) => {
                 currentCategory: action.currentCategory,
             };
 
-        // TODO: Add a comment describing what the default case is for
-        // Your comment here
+        /* This case keeps the application from crashing if the developers didn't include 
+        the type of action that is passed down this switch statement.*/
         default:
             return state;
     }

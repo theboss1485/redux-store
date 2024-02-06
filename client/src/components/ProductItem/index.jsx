@@ -12,9 +12,9 @@ import {
 
 } from '../../../store/reducers/slices/cartSlice'
 
+/* This function renders each item in the list of products that is defined
+by the current category.*/
 function ProductItem(item) {
-
-    
 
     const dispatch = useDispatch();
 
@@ -31,6 +31,7 @@ function ProductItem(item) {
     const cart = useSelector((state) => state.cart);
     const itemInCart = cart.cart.find((cartItem) => cartItem._id === _id)
 
+    // This function adds a product to the cart.
     const addToCart = () => {
 
         if (itemInCart) {
@@ -63,6 +64,7 @@ function ProductItem(item) {
         }
     }
 
+    // Here, we render the ProductItems with HTML.
     return (
             <div className="card px-1 py-1">
                 <Link to={`/products/${_id}`}>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
 
+// This function displays the user's order history.
 function OrderHistory() {
 
     const { data } = useQuery(QUERY_USER);

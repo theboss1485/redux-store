@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 const Order = require('./Order');
 
+// This file defines the User model for this application.
 const userSchema = new Schema({
 
     firstName: {

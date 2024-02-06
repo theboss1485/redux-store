@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateCategories as updateCategoriesAction, 
          updateCurrentCategory as updateCurrentCategoryAction} from '../../../store/reducers/slices/categorySlice';
 
+// This function deals with generating the menu of categories in the store.
 function CategoryMenu() {
 
     const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
@@ -48,6 +49,7 @@ function CategoryMenu() {
 
     }, [categoryData, loading, dispatch]);
 
+    // This function is called whenever the use clicks on a category.
     const handleClick = (id) => {
 
         dispatch(updateCurrentCategoryAction(
@@ -58,6 +60,7 @@ function CategoryMenu() {
         ));
     };
 
+    // Here, we actually generate the category menu.
     return (
 
         <div>

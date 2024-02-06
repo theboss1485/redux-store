@@ -1,3 +1,5 @@
+/* This file adds in linting settings in order for linting to function.
+This is to keep code looking a certain way.*/
 module.exports = {
     env: { browser: true, es2020: true },
 

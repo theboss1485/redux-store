@@ -7,11 +7,13 @@ import { ADD_USER } from '../utils/mutations';
 function Signup(props) {
 
     const [formState, setFormState] = useState({ email: '', password: '' });
-    const [addUser] = useMutation(ADD_USER);
+    const [addUser, { error }] = useMutation(ADD_USER);
 
     const handleFormSubmit = async (event) => {
 
         event.preventDefault();
+
+
 
         const mutationResponse = await addUser({
 
@@ -86,6 +88,11 @@ function Signup(props) {
                         onChange={handleChange}
                     />
                 </div>
+                {error ? (
+                    <div>
+                        <p className="error-text">Something went wrong.  Be sure to fill in all the fields and enter an email address that isn't in use!</p>
+                    </div>
+                ) : null}
                 <div className="flex-row flex-end">
                     <button type="submit">Submit</button>
                 </div>

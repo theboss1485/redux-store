@@ -14,6 +14,7 @@ module.exports = {
         },
     }),
 
+    //This function authenticates the user's authorization token.
     authMiddleware: function ({ req }) {
 
         // allows token to be sent via req.body, req.query, or headers
@@ -30,6 +31,7 @@ module.exports = {
             return req;
         }
 
+        // This function verifies the token and gets the user data out of it.
         try {
 
             const { data } = jwt.verify(token, secret, { maxAge: expiration });
@@ -43,6 +45,7 @@ module.exports = {
         return req;
     },
 
+    // This function adds new data to the user's authorization token.
     signToken: function ({ firstName, email, _id }) {
 
         const payload = { firstName, email, _id };

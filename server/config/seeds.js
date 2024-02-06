@@ -2,6 +2,8 @@ const db = require('./connection');
 const { User, Product, Category } = require('../models');
 const cleanDB = require('./cleanDB');
 
+/*This file calls the function to clear the data form the database.
+It then seeds the database with categories, products, and users.*/ 
 db.once('open', async () => {
 
     await cleanDB('Category', 'categories');

@@ -1,6 +1,7 @@
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 
+// The navbar holds the links to login and sign up.
 function Nav() {
 
     function showNavigation() {
@@ -16,7 +17,7 @@ function Nav() {
                         </Link>
                     </li>
                     <li className="mx-1">
-                        {/* this is not using the Link component to logout or user and then refresh the application to the start */}
+                        {/* this function call is logging the user out and then refreshing the application to the start */}
                         <a href="/" onClick={() => Auth.logout()}>
                             Logout
                         </a>
@@ -26,20 +27,21 @@ function Nav() {
 
         } else {
 
-        return (
-            <ul className="flex-row">
-                <li className="mx-1">
-                    <Link to="/signup">
-                        Signup
-                    </Link>
-                </li>
-                <li className="mx-1">
-                    <Link to="/login">
-                        Login
-                    </Link>
-                </li>
-            </ul>
-        );
+            // Here, we render the navbar with HTML.
+            return (
+                <ul className="flex-row">
+                    <li className="mx-1">
+                        <Link to="/signup">
+                            Signup
+                        </Link>
+                    </li>
+                    <li className="mx-1">
+                        <Link to="/login">
+                            Login
+                        </Link>
+                    </li>
+                </ul>
+            );
         }
     }
 

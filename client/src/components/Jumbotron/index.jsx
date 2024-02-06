@@ -1,3 +1,4 @@
+// The jumbotron is the success message that appears after a purchse is made.
 function Jumbotron({ children }) {
     return (
         <div

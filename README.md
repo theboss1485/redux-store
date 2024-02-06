@@ -52,4 +52,4 @@ This was a project I personally completed, so N/A.
 
 ## Tests
 
-N/A
+This application does include tests.  Please keep in mind that they don't cover the redux store, but only the context API reducers that the application used to use.  I didn't update them to use redux because a tutor said that was unnecessary.  If you wish to run the tests yourself, you will need to clone my repository with the "git clone" command.  Then, navigate to the project's root directory in Git Bash.  Run the "npm install" to install all necessary dependencies.  Finally, run the command "npm run test" from the root directory.  You should see all the tests pass successfully.

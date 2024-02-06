@@ -1,7 +1,9 @@
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// This file defines the Order model for this application.
 const orderSchema = new Schema({
 
     purchaseDate: {

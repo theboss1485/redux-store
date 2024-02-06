@@ -19,6 +19,8 @@ import { idbPromise } from '../utils/helpers';
 import spinner from '../assets/spinner.gif';
 import { useDispatch, useSelector } from 'react-redux';
 
+/* This function brings up a page that has a picture of the specific store item the user clicked on,
+a placeholder description, and options to add and remove the item to and from the cart.*/
 function Detail() {
     
     const dispatch = useDispatch();
@@ -31,12 +33,14 @@ function Detail() {
     const cart = useSelector((state) => state.cart);
     const products = useSelector((state) => state.products);
 
+    
+
     useEffect(() => {
 
         // already in global store
-        if (products.length) {
+        if (products.products.length) {
 
-            setCurrentProduct(products.find((product) => product._id === id));
+            setCurrentProduct(products.products.find((product) => product._id === id));
         }
         
         // retrieved from server
@@ -71,9 +75,10 @@ function Detail() {
 
     }, [products, data, loading, dispatch, id]);
 
+    // This function adds an item to the cart from the item's detail page.
     const addToCart = () => {
 
-        const itemInCart = cart.find((cartItem) => cartItem._id === id);
+        const itemInCart = cart.cart.find((cartItem) => cartItem._id === id);
         
         if (itemInCart) {
 
@@ -103,6 +108,7 @@ function Detail() {
         }
     };
 
+    // This function removes an item from the cart from the item's detail page.
     const removeFromCart = () => {
 
         dispatch(removeFromCartAction(
@@ -115,10 +121,11 @@ function Detail() {
         idbPromise('cart', 'delete', { ...currentProduct });
     };
 
+    // Here, we render the detail page for an object.
     return (
-        
+
         <>
-            {currentProduct && cart ? (
+            {currentProduct && cart.cart ? (
                 <div className="container my-1">
                     <Link to="/">← Back to Products</Link>
                     <h2>{currentProduct.name}</h2>
@@ -127,7 +134,7 @@ function Detail() {
                         <strong>Price:</strong>${currentProduct.price}{' '}
                         <button onClick={addToCart}>Add to Cart</button>
                         <button
-                        disabled={!cart.find((p) => p._id === currentProduct._id)}
+                        disabled={!cart.cart.find((p) => p._id === currentProduct._id)}
                         onClick={removeFromCart}
                         >
                         Remove from Cart

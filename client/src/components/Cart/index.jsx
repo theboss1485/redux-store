@@ -5,7 +5,6 @@ import { QUERY_CHECKOUT } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import {
 
@@ -17,6 +16,7 @@ import './style.css';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
+// This function creates the cart and uses Stripe to prepare it for payment.
 const Cart = () => {
 
     const dispatch = useDispatch();
@@ -38,6 +38,7 @@ const Cart = () => {
 
     useEffect(() => {
 
+        // This function gets the cart out of global state.
         async function getCart() {
 
             const cart = await idbPromise('cart', 'get');
@@ -54,13 +55,15 @@ const Cart = () => {
             getCart();
         }
 
-  }, [cart.cart.length, dispatch]);
+    }, [cart.cart.length, dispatch]);
 
+    // This function displays and hides the cart when the cart icon is clicked.
     function toggleCart() {
 
         dispatch(toggleCartAction());
     }
 
+    /* This function calculates the total amount of money the shopper owes to the store.*/
     function calculateTotal() {
 
         let sum = 0;
@@ -71,6 +74,8 @@ const Cart = () => {
         return sum.toFixed(2);
     }
 
+    /* This function sends the contents of the users cart over for use in the checkout process. 
+    Then, it calls the function to display the checkout page.*/
     function submitCheckout() {
 
         const productIds = [];
@@ -100,6 +105,7 @@ const Cart = () => {
         );
     }
 
+    // Here, we generate the shopping cart with HTML.
     return (
 
         <div className="cart">

@@ -14,6 +14,7 @@ import Signup from './pages/Signup';
 import Success from './pages/Success';
 import OrderHistory from './pages/OrderHistory';
 
+// Here, we use React to set up routes for the application.
 const router = createBrowserRouter([
     {
         path: '/',
@@ -56,6 +57,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 
+    // Here we wrap the application in a provider so that it has access to the store.
     <Provider store={store}> 
         <RouterProvider router={router}>
             <App />

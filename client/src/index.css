@@ -1,3 +1,6 @@
+/* This file contains styling for the entire application. */
+
+/* Here, we set up variables to be used throughout this file. */
 :root {
     
     --primary: #232F3E;
@@ -120,6 +123,7 @@ button:hover {
     opacity: .8;
 }
 
+/* Here we style buttons that aren't enabled. */
 button[disabled] {
 
     cursor: default;
@@ -240,6 +244,8 @@ input:focus {
     color: var(--error);
 }
 
+/* Here, we make the width of tags that have the card class applied to be at 100% width at screen
+widths of 768 pixels or less. */
 @media screen and (max-width: 768px) {
     .card {
         
