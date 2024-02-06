@@ -28,8 +28,8 @@ function ProductItem(item) {
 
     } = item;
 
-    const cart = useSelector((state) => state.cart);
-    const itemInCart = cart.cart.find((cartItem) => cartItem._id === _id)
+    const cart = useSelector((state) => state.cart.cart);
+    const itemInCart = cart.find((cartItem) => cartItem._id === _id)
 
     // This function adds a product to the cart.
     const addToCart = () => {

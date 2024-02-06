@@ -55,6 +55,7 @@ const cartSlice = createSlice({
                 if (action.payload._id === product._id) {
                     product.purchaseQuantity = action.payload.purchaseQuantity;
                 }
+                
                 return product;
             })
 

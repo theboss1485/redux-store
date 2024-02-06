@@ -45,8 +45,9 @@ const resolvers = {
             if (context.user) {
                 
                 const user = await User.findById(context.user._id).populate({
-                path: 'orders.products',
-                populate: 'category'
+
+                    path: 'orders.products',
+                    populate: 'category'
                 });
 
                 user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
@@ -134,6 +135,7 @@ const resolvers = {
         addOrder: async (parent, { products }, context) => {
 
             if (context.user) {
+
                 const order = new Order({ products });
 
                 await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
@@ -148,6 +150,7 @@ const resolvers = {
         updateUser: async (parent, args, context) => {
 
             if (context.user) {
+                
                 return await User.findByIdAndUpdate(context.user._id, args, { new: true });
             }
 

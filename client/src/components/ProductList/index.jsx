@@ -12,7 +12,7 @@ function ProductList() {
 
     const dispatch = useDispatch();
     const currentCategory = useSelector((state) => state.categories.currentCategory);
-    const products = useSelector((state) => state.products);
+    const products = useSelector((state) => state.products.products);
     
 
     const { loading, data } = useQuery(QUERY_PRODUCTS);
@@ -54,10 +54,10 @@ function ProductList() {
 
         if (!currentCategory) {
 
-            return products.products;
+            return products;
         }
 
-        return products.products.filter(
+        return products.filter(
 
             (product) => product.category._id === currentCategory
         );
@@ -68,7 +68,7 @@ function ProductList() {
         <div className="my-2">
             <h2>Our Products:</h2>
             
-            {products.products.length ? (
+            {products.length ? (
 
                 <div className="flex-row">
                     {filterProducts().map((product) => (

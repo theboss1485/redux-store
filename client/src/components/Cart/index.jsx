@@ -20,7 +20,7 @@ const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 const Cart = () => {
 
     const dispatch = useDispatch();
-    const cart = useSelector((state) => state.cart);
+    const cart = useSelector((state) => state.cart.cart);
     const cartOpen = useSelector((state) => state.cart.cartOpen);
 
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
@@ -50,12 +50,12 @@ const Cart = () => {
             ));
         }
 
-        if (!cart.cart.length) {
+        if (!cart.length) {
 
             getCart();
         }
 
-    }, [cart.cart.length, dispatch]);
+    }, [cart.length, dispatch]);
 
     // This function displays and hides the cart when the cart icon is clicked.
     function toggleCart() {
@@ -67,7 +67,8 @@ const Cart = () => {
     function calculateTotal() {
 
         let sum = 0;
-        cart.cart.forEach((item) => {
+        cart.forEach((item) => {
+
             sum += item.price * item.purchaseQuantity;
         });
 
@@ -80,9 +81,10 @@ const Cart = () => {
 
         const productIds = [];
 
-        cart.cart.forEach((item) => {
+        cart.forEach((item) => {
 
             for (let i = 0; i < item.purchaseQuantity; i++) {
+
                 productIds.push(item._id);
             }
         });
@@ -113,9 +115,10 @@ const Cart = () => {
                 [close]
             </div>
             <h2>Shopping Cart</h2>
-            {cart.cart.length ? (
+            {cart.length ? (
                 <div>
-                    {cart.cart.map((item) => (
+                    {cart.map((item) => (
+
                         <CartItem key={item._id} item={item} />
                     ))}
 
@@ -123,9 +126,9 @@ const Cart = () => {
                         <strong>Total: ${calculateTotal()}</strong>
 
                         {Auth.loggedIn() ? (
-                        <button onClick={submitCheckout}>Checkout</button>
+                            <button onClick={submitCheckout}>Checkout</button>
                         ) : (
-                        <span>(log in to check out)</span>
+                            <span>(log in to check out)</span>
                         )}
                     </div>
                 </div>

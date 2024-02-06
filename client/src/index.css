@@ -247,6 +247,7 @@ input:focus {
 /* Here, we make the width of tags that have the card class applied to be at 100% width at screen
 widths of 768 pixels or less. */
 @media screen and (max-width: 768px) {
+    
     .card {
         
         width: 100%;

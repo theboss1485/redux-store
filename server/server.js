@@ -11,6 +11,7 @@ const db = require('./config/connection');
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
+
     typeDefs,
     resolvers,
 });
@@ -37,7 +38,8 @@ const startApolloServer = async () => {
         app.use(express.static(path.join(__dirname, '../client/dist')));
 
         app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+            
+            res.sendFile(path.join(__dirname, '../client/dist/index.html'));
         });
     }
 

@@ -18,6 +18,7 @@ const initialState = {
     products: [],
 
     cart: [
+
         {
             _id: '1',
             name: 'Soup',
@@ -98,7 +99,6 @@ test('REMOVE_FROM_CART', () => {
 
     expect(newState2.cartOpen).toBe(false);
     expect(newState2.cart.length).toBe(0);
-
     expect(initialState.cart.length).toBe(2);
 });
 
@@ -115,6 +115,7 @@ test('ADD_MULTIPLE_TO_CART', () => {
     expect(newState.cart.length).toBe(4);
     expect(initialState.cart.length).toBe(2);
 });
+
 // This test checks the UPDATE_CATEGORIES action to make sure it works.
 test('UPDATE_CATEGORIES', () => {
 

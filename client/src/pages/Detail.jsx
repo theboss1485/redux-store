@@ -30,17 +30,17 @@ function Detail() {
 
     const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-    const cart = useSelector((state) => state.cart);
-    const products = useSelector((state) => state.products);
+    const cart = useSelector((state) => state.cart.cart);
+    const products = useSelector((state) => state.products.products);
 
     
 
     useEffect(() => {
 
         // already in global store
-        if (products.products.length) {
+        if (products.length) {
 
-            setCurrentProduct(products.products.find((product) => product._id === id));
+            setCurrentProduct(products.find((product) => product._id === id));
         }
         
         // retrieved from server
@@ -78,7 +78,7 @@ function Detail() {
     // This function adds an item to the cart from the item's detail page.
     const addToCart = () => {
 
-        const itemInCart = cart.cart.find((cartItem) => cartItem._id === id);
+        const itemInCart = cart.find((cartItem) => cartItem._id === id);
         
         if (itemInCart) {
 
@@ -125,7 +125,7 @@ function Detail() {
     return (
 
         <>
-            {currentProduct && cart.cart ? (
+            {currentProduct && cart ? (
                 <div className="container my-1">
                     <Link to="/">← Back to Products</Link>
                     <h2>{currentProduct.name}</h2>
@@ -134,8 +134,8 @@ function Detail() {
                         <strong>Price:</strong>${currentProduct.price}{' '}
                         <button onClick={addToCart}>Add to Cart</button>
                         <button
-                        disabled={!cart.cart.find((p) => p._id === currentProduct._id)}
-                        onClick={removeFromCart}
+                            disabled={!cart.find((p) => p._id === currentProduct._id)}
+                            onClick={removeFromCart}
                         >
                         Remove from Cart
                         </button>
