@@ -1,6 +1,7 @@
 const models = require('../models');
 const db = require('../config/connection');
 
+// This function clears the database of data.
 module.exports = async (modelName, collectionName) => {
     try {
 

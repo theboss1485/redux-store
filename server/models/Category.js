@@ -1,7 +1,10 @@
+
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// This file defines the Category model for this application.
 const categorySchema = new Schema({
 
     name: {

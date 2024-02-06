@@ -4,6 +4,7 @@ import Jumbotron from '../components/Jumbotron';
 import { ADD_ORDER } from '../utils/mutations';
 import { idbPromise } from '../utils/helpers';
 
+// This function displays a success message when an order is placed successfully.
 function Success() {
 
     const [addOrder] = useMutation(ADD_ORDER);

@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import ProductItem from '../ProductItem';
-import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { updateProducts as updateProductsAction } from '../../../store/reducers/slices/productSlice';
 import { useQuery } from '@apollo/client';
 import { QUERY_PRODUCTS } from '../../utils/queries';
@@ -9,19 +7,19 @@ import { idbPromise } from '../../utils/helpers';
 import spinner from '../../assets/spinner.gif';
 import { useSelector, useDispatch } from 'react-redux';
 
+// This function renders the list of products.
 function ProductList() {
-        const dispatch = useDispatch();
-        const currentCategory = useSelector((state) => state.categories.currentCategory);
-        const products = useSelector((state) => state.products);
-    // const [state, dispatch] = useStoreContext();
 
-    // const { currentCategory } = state;
+    const dispatch = useDispatch();
+    const currentCategory = useSelector((state) => state.categories.currentCategory);
+    const products = useSelector((state) => state.products.products);
+    
 
     const { loading, data } = useQuery(QUERY_PRODUCTS);
 
     useEffect(() => {
-        
 
+        // If there is data, we update the state and store the data in indexedDB.
         if (data) {
 
             dispatch(updateProductsAction(
@@ -51,28 +49,26 @@ function ProductList() {
 
     }, [data, loading, dispatch]);
 
+    // Here, we filter the list of products to only include the products in the selected category.
     function filterProducts() {
-
-        console.log("test")
 
         if (!currentCategory) {
 
-            
-
-            return products.products;
+            return products;
         }
 
-        return products.products.filter(
+        return products.filter(
 
             (product) => product.category._id === currentCategory
         );
     }
 
+
     return (
         <div className="my-2">
             <h2>Our Products:</h2>
             
-            {products.products.length ? (
+            {products.length ? (
 
                 <div className="flex-row">
                     {filterProducts().map((product) => (

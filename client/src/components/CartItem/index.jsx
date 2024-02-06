@@ -4,10 +4,12 @@ from "../../../store/reducers/slices/cartSlice";
 import { idbPromise } from "../../utils/helpers";
 import { useSelector, useDispatch } from 'react-redux';
 
+// This function performs various actions on the items in the shopping cart.
 const CartItem = ({ item }) => {
 
     const dispatch = useDispatch();
 
+    // This function removes an item from the shopping cart.
     const removeFromCart = (item) => {
 
         dispatch(removeFromCartAction(
@@ -20,6 +22,9 @@ const CartItem = ({ item }) => {
         idbPromise('cart', 'delete', { ...item });
     };
 
+    /* This function is called when the contents of the cart change.
+    It calls the function to remove an item from the cart and also
+    update the quantity of the cart.*/
     const onChange = (e) => {
 
         const value = e.target.value;
@@ -50,6 +55,7 @@ const CartItem = ({ item }) => {
         }
     }
 
+    // Here, we generate each cart item with HTML.
     return (
         
         <div className="flex-row">

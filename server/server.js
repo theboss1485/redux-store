@@ -11,11 +11,12 @@ const db = require('./config/connection');
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
+
     typeDefs,
     resolvers,
 });
 
-// Create a new instance of an Apollo server with the GraphQL schema
+// This function creates a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
 
     await server.start();
@@ -23,7 +24,7 @@ const startApolloServer = async () => {
     app.use(express.urlencoded({ extended: false }));
     app.use(express.json());
 
-    // Serve up static assets
+    // Here, we serve up static image assets.
     app.use('/images', express.static(path.join(__dirname, '../client/images')));
 
     app.use('/graphql', expressMiddleware(server, {
@@ -31,12 +32,14 @@ const startApolloServer = async () => {
         context: authMiddleware
     }));
 
+    // if we're in a production environment, we serve client/build as static assets
     if (process.env.NODE_ENV === 'production') {
 
         app.use(express.static(path.join(__dirname, '../client/dist')));
 
         app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+            
+            res.sendFile(path.join(__dirname, '../client/dist/index.html'));
         });
     }
 

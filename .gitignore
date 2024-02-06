@@ -1,2 +1,3 @@
+# This file adds a list of files to be left out when a push is made to GitHub.
 node_modules
 package-lock.json

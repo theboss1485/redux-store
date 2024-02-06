@@ -1,3 +1,4 @@
+// This file initializes the application and sets up the Apollo Client.
 import { Outlet } from 'react-router-dom';
 import {
     ApolloClient,
@@ -9,7 +10,6 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 import Nav from './components/Nav';
-import { StoreProvider } from './utils/GlobalState';
 
 const httpLink = createHttpLink({
 
@@ -41,10 +41,8 @@ function App() {
     return (
         
         <ApolloProvider client={client}>
-            <StoreProvider>
-                <Nav />
-                <Outlet />
-            </StoreProvider>
+            <Nav />
+            <Outlet />
         </ApolloProvider>
     );
 }

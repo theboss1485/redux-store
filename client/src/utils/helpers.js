@@ -1,3 +1,4 @@
+// This function makes a name plural.
 export function pluralize(name, count) {
 
     if (count === 1) {
@@ -8,6 +9,7 @@ export function pluralize(name, count) {
     return name + 's';
 }
 
+// This function appears to store data in IndexedDB when data for the cart, products, or categories changes.
 export function idbPromise(storeName, method, object) {
 
     return new Promise((resolve, reject) => {

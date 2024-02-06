@@ -4,10 +4,10 @@ import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
 
-function Signup(props) {
+function Signup() {
 
     const [formState, setFormState] = useState({ email: '', password: '' });
-    const [addUser] = useMutation(ADD_USER);
+    const [addUser, { error }] = useMutation(ADD_USER);
 
     const handleFormSubmit = async (event) => {
 
@@ -86,6 +86,11 @@ function Signup(props) {
                         onChange={handleChange}
                     />
                 </div>
+                {error ? (
+                    <div>
+                        <p className="error-text">Something went wrong.  Be sure to fill in all the fields and enter an email address that isn't in use!</p>
+                    </div>
+                ) : null}
                 <div className="flex-row flex-end">
                     <button type="submit">Submit</button>
                 </div>

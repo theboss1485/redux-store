@@ -1,3 +1,4 @@
+// This file initializes the redux store.
 import { configureStore } from '@reduxjs/toolkit'
 
 import rootReducer from './reducers/rootReducer';

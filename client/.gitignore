@@ -1,3 +1,4 @@
+# This file adds a list of files to be left out when a push is made to GitHub.
 # Logs
 logs
 *.log

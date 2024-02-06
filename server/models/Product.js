@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// This file defines the Product model for this application.
 const productSchema = new Schema({
 
     name: {

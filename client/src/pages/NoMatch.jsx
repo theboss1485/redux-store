@@ -1,5 +1,6 @@
 import Jumbotron from "../components/Jumbotron";
 
+// This page is displayed if the user goes to an invalid URL.
 const NoMatch = () => {
 
     return (

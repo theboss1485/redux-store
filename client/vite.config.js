@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
+/* This file configures vite to allow the client side code to run
+on port 3000 and the server side code to run on port 3001.*/
 export default defineConfig({
 
     plugins: [react()],

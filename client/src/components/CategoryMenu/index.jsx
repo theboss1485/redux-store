@@ -7,13 +7,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateCategories as updateCategoriesAction, 
          updateCurrentCategory as updateCurrentCategoryAction} from '../../../store/reducers/slices/categorySlice';
 
+// This function deals with generating the menu of categories in the store.
 function CategoryMenu() {
 
     const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
-    const categories = useSelector((state) => state.categories);
+    const categories = useSelector((state) => state.categories.categories);
 
-    categories.categories.map((category) => category)
+    categories.map((category) => category)
 
     const dispatch = useDispatch();
 
@@ -48,6 +49,7 @@ function CategoryMenu() {
 
     }, [categoryData, loading, dispatch]);
 
+    // This function is called whenever the use clicks on a category.
     const handleClick = (id) => {
 
         dispatch(updateCurrentCategoryAction(
@@ -58,14 +60,16 @@ function CategoryMenu() {
         ));
     };
 
+    // Here, we actually generate the category menu.
     return (
 
         <div>
             <h2>Choose a Category:</h2>
-            {categories.categories.map((item) => (
+            {categories.map((item) => (
                 <button
                     key={item._id}
                     onClick={() => {
+                        
                         handleClick(item._id);
                     }}
                     >
@@ -74,7 +78,8 @@ function CategoryMenu() {
             ))}
             <button
                 onClick={() => {
-                handleClick('');
+                    
+                    handleClick('');
                 }}
             >
                 All

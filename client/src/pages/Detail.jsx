@@ -19,6 +19,8 @@ import { idbPromise } from '../utils/helpers';
 import spinner from '../assets/spinner.gif';
 import { useDispatch, useSelector } from 'react-redux';
 
+/* This function brings up a page that has a picture of the specific store item the user clicked on,
+a placeholder description, and options to add and remove the item to and from the cart.*/
 function Detail() {
     
     const dispatch = useDispatch();
@@ -28,8 +30,10 @@ function Detail() {
 
     const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-    const cart = useSelector((state) => state.cart);
-    const products = useSelector((state) => state.products);
+    const cart = useSelector((state) => state.cart.cart);
+    const products = useSelector((state) => state.products.products);
+
+    
 
     useEffect(() => {
 
@@ -71,6 +75,7 @@ function Detail() {
 
     }, [products, data, loading, dispatch, id]);
 
+    // This function adds an item to the cart from the item's detail page.
     const addToCart = () => {
 
         const itemInCart = cart.find((cartItem) => cartItem._id === id);
@@ -103,6 +108,7 @@ function Detail() {
         }
     };
 
+    // This function removes an item from the cart from the item's detail page.
     const removeFromCart = () => {
 
         dispatch(removeFromCartAction(
@@ -115,8 +121,9 @@ function Detail() {
         idbPromise('cart', 'delete', { ...currentProduct });
     };
 
+    // Here, we render the detail page for an object.
     return (
-        
+
         <>
             {currentProduct && cart ? (
                 <div className="container my-1">
@@ -127,8 +134,8 @@ function Detail() {
                         <strong>Price:</strong>${currentProduct.price}{' '}
                         <button onClick={addToCart}>Add to Cart</button>
                         <button
-                        disabled={!cart.find((p) => p._id === currentProduct._id)}
-                        onClick={removeFromCart}
+                            disabled={!cart.find((p) => p._id === currentProduct._id)}
+                            onClick={removeFromCart}
                         >
                         Remove from Cart
                         </button>

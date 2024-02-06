@@ -1,4 +1,5 @@
-
+/* This file contains tests that can be run to make sure the original Context API store works.
+I didn't migrate these to the redux store because a tutor said that wasn't necessary.*/
 import { reducer } from '../utils/reducers';
 import {
     UPDATE_PRODUCTS,
@@ -17,6 +18,7 @@ const initialState = {
     products: [],
 
     cart: [
+
         {
             _id: '1',
             name: 'Soup',
@@ -34,6 +36,7 @@ const initialState = {
     currentCategory: '1',
 };
 
+// This test checks the UPDATE_PRODUCTS action to make sure it works.
 test('UPDATE_PRODUCTS', () => {
 
     let newState = reducer(initialState, {
@@ -46,6 +49,7 @@ test('UPDATE_PRODUCTS', () => {
     expect(initialState.products.length).toBe(0);
 });
 
+// This test checks the ADD_TO_CART action to make sure it works.
 test('ADD_TO_CART', () => {
 
     let newState = reducer(initialState, {
@@ -58,6 +62,7 @@ test('ADD_TO_CART', () => {
     expect(initialState.cart.length).toBe(2);
 });
 
+// This test checks the UPDATE_CART_QUANTITY action to make sure it works.
 test('UPDATE_CART_QUANTITY', () => {
 
     let newState = reducer(initialState, {
@@ -73,6 +78,7 @@ test('UPDATE_CART_QUANTITY', () => {
     expect(initialState.cartOpen).toBe(false);
 });
 
+// This test checks the REMOVE_FROM_CART action to make sure it works.
 test('REMOVE_FROM_CART', () => {
 
     let newState1 = reducer(initialState, {
@@ -93,10 +99,11 @@ test('REMOVE_FROM_CART', () => {
 
     expect(newState2.cartOpen).toBe(false);
     expect(newState2.cart.length).toBe(0);
-
     expect(initialState.cart.length).toBe(2);
 });
 
+// This test checks the ADD_MULTIPLE_TO_CART action to make sure it works.
+// That action adds multiple items to the cart at the same time.
 test('ADD_MULTIPLE_TO_CART', () => {
 
     let newState = reducer(initialState, {
@@ -109,6 +116,7 @@ test('ADD_MULTIPLE_TO_CART', () => {
     expect(initialState.cart.length).toBe(2);
 });
 
+// This test checks the UPDATE_CATEGORIES action to make sure it works.
 test('UPDATE_CATEGORIES', () => {
 
     let newState = reducer(initialState, {
@@ -121,6 +129,7 @@ test('UPDATE_CATEGORIES', () => {
     expect(initialState.categories.length).toBe(1);
 });
 
+// This test checks the UPDATE_CURRENT_CATEGORY action to make sure it works.
 test('UPDATE_CURRENT_CATEGORY', () => {
 
     let newState = reducer(initialState, {
@@ -133,6 +142,7 @@ test('UPDATE_CURRENT_CATEGORY', () => {
     expect(initialState.currentCategory).toBe('1');
 });
 
+// This test checks the CLEAR_CART action to make sure it works.
 test('CLEAR_CART', () => {
     let newState = reducer(initialState, {
 
@@ -144,6 +154,7 @@ test('CLEAR_CART', () => {
     expect(initialState.cart.length).toBe(2);
 });
 
+// This test checks the TOGGLE_CART action to make sure it works.
 test('TOGGLE_CART', () => {
 
     let newState = reducer(initialState, {
